@@ -1,9 +1,15 @@
-
 import { GoogleGenAI, Type, Schema } from "@google/genai";
 import { AppConfig, VisionAnalysis, Script, GeneratedVeoData } from "../types";
-console.log("🔑 Gemini ENV is:", import.meta.env.VITE_GEMINI_API_KEY, typeof import.meta.env.VITE_GEMINI_API_KEY);
 
-const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY });
+console.log("🔑 Gemini ENV:", import.meta.env.VITE_GEMINI_API_KEY);
+
+const getAI = () => {
+  const key = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!key) {
+    throw new Error("🚨 Missing VITE_GEMINI_API_KEY — Check Vercel Environment Variables!");
+  }
+  return new GoogleGenAI({ apiKey: key });
+};
 
 // --- Helper: File to Base64 ---
 export const fileToGenerativePart = async (file: File): Promise<string> => {
