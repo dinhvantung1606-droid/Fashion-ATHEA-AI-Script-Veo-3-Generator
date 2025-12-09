@@ -1,7 +1,6 @@
 import { GoogleGenAI, Type, Schema } from "@google/genai";
 import { AppConfig, VisionAnalysis, Script, GeneratedVeoData } from "../types";
 
-console.log("🔑 Gemini ENV:", import.meta.env.VITE_GEMINI_API_KEY);
 
 const getAI = () => {
   const key = import.meta.env.VITE_GEMINI_API_KEY;
